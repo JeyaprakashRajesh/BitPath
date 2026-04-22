@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+/*
+  Semantic theme tokens:
+  Apply `.light` or `.dark` on `html` or `body` to switch theme.
+*/
+:root,
+.light {
+  color-scheme: light;
+
+  /* Core */
+  --bg: #faf7ff;
+  --surface: #ffffff;
+  --surface-elevated: #f4edff;
+  --text: #22183d;
+  --text-muted: #5d4f85;
+
+  /* Brand + interaction */
+  --primary: #7c3aed;
+  --primary-hover: #6d28d9;
+  --primary-pressed: #5b21b6;
+  --on-primary: #ffffff;
+  --accent: #a78bfa;
+  --ring: #c4b5fd;
+
+  /* UI structure */
+  --border: #ddd6fe;
+  --input-bg: #ffffff;
+  --input-border: #c4b5fd;
+
+  /* Feedback */
+  --success: #0f766e;
+  --warning: #b45309;
+  --danger: #be123c;
+  --info: #4338ca;
+
+  /* Optional gradient stops */
+  --grad-1: #f5f3ff;
+  --grad-2: #ede9fe;
+  --grad-3: #ddd6fe;
+}
+
+.dark {
+  color-scheme: dark;
+
+  /* Core */
+  --bg: #0f0a1f;
+  --surface: #1a1233;
+  --surface-elevated: #241948;
+  --text: #f1ebff;
+  --text-muted: #c6b9f4;
+
+  /* Brand + interaction */
+  --primary: #a78bfa;
+  --primary-hover: #c4b5fd;
+  --primary-pressed: #8b5cf6;
+  --on-primary: #1a1233;
+  --accent: #7c3aed;
+  --ring: #8b5cf6;
+
+  /* UI structure */
+  --border: #3b2d66;
+  --input-bg: #140f2a;
+  --input-border: #5b3fa8;
+
+  /* Feedback */
+  --success: #34d399;
+  --warning: #f59e0b;
+  --danger: #fb7185;
+  --info: #818cf8;
+
+  /* Optional gradient stops */
+  --grad-1: #140f2a;
+  --grad-2: #1a1233;
+  --grad-3: #241948;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background: radial-gradient(circle at top left, var(--grad-2), var(--bg) 45%, var(--grad-1));
+  color: var(--text);
+  transition: background-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+}
+
+/* Reusable utility classes */
+.bg-app {
+  background-color: var(--bg);
+}
+
+.bg-surface {
+  background-color: var(--surface);
+}
+
+.bg-surface-elevated {
+  background-color: var(--surface-elevated);
+}
+
+.text-app {
+  color: var(--text);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.border-app {
+  border-color: var(--border);
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--on-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-primary:active {
+  background-color: var(--primary-pressed);
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
