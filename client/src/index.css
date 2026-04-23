@@ -1,78 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;600;700&family=Jersey+25&display=swap');
 @import "tailwindcss";
 
-/*
-  Semantic theme tokens:
-  Apply `.light` or `.dark` on `html` or `body` to switch theme.
-*/
-:root,
-.light {
-  color-scheme: light;
-
-  /* Core */
-  --bg: #faf7ff;
-  --surface: #ffffff;
-  --surface-elevated: #f4edff;
-  --text: #22183d;
-  --text-muted: #5d4f85;
-
-  /* Brand + interaction */
-  --primary: #7c3aed;
-  --primary-hover: #6d28d9;
-  --primary-pressed: #5b21b6;
-  --on-primary: #ffffff;
-  --accent: #a78bfa;
-  --ring: #c4b5fd;
-
-  /* UI structure */
-  --border: #ddd6fe;
-  --input-bg: #ffffff;
-  --input-border: #c4b5fd;
-
-  /* Feedback */
-  --success: #0f766e;
-  --warning: #b45309;
-  --danger: #be123c;
-  --info: #4338ca;
-
-  /* Optional gradient stops */
-  --grad-1: #f5f3ff;
-  --grad-2: #ede9fe;
-  --grad-3: #ddd6fe;
+:root {
+  color-scheme: dark light;
+  --theme-bg: #0a0a0f;
+  --theme-surface: #141420;
+  --theme-border: #2a2a36;
+  --theme-primary: #7c3aed;
+  --theme-accent: #22d3ee;
+  --theme-highlight: #f472b6;
+  --theme-text: #e5e7eb;
+  --theme-muted: #9ca3af;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
 }
 
-.dark {
-  color-scheme: dark;
+@media (prefers-color-scheme: light) {
+  :root {
+    --theme-bg: #f8fafc;
+    --theme-surface: #ffffff;
+    --theme-border: #d6d8df;
+    --theme-primary: #7c3aed;
+    --theme-accent: #0ea5b7;
+    --theme-highlight: #db2777;
+    --theme-text: #0f172a;
+    --theme-muted: #475569;
+  }
+}
 
-  /* Core */
-  --bg: #0f0a1f;
-  --surface: #1a1233;
-  --surface-elevated: #241948;
-  --text: #f1ebff;
-  --text-muted: #c6b9f4;
+@theme {
+  --color-app-bg: var(--theme-bg);
+  --color-app-surface: var(--theme-surface);
+  --color-app-border: var(--theme-border);
+  --color-app-primary: var(--theme-primary);
+  --color-app-accent: var(--theme-accent);
+  --color-app-highlight: var(--theme-highlight);
+  --color-app-text: var(--theme-text);
+  --color-app-muted: var(--theme-muted);
+  --font-highlight: "Jersey 25", cursive;
+  --font-heading: "JetBrains Mono", monospace;
+  --font-body: "Inter", sans-serif;
+}
 
-  /* Brand + interaction */
-  --primary: #a78bfa;
-  --primary-hover: #c4b5fd;
-  --primary-pressed: #8b5cf6;
-  --on-primary: #1a1233;
-  --accent: #7c3aed;
-  --ring: #8b5cf6;
-
-  /* UI structure */
-  --border: #3b2d66;
-  --input-bg: #140f2a;
-  --input-border: #5b3fa8;
-
-  /* Feedback */
-  --success: #34d399;
-  --warning: #f59e0b;
-  --danger: #fb7185;
-  --info: #818cf8;
-
-  /* Optional gradient stops */
-  --grad-1: #140f2a;
-  --grad-2: #1a1233;
-  --grad-3: #241948;
+* {
+  box-sizing: border-box;
 }
 
 html,
@@ -82,50 +53,42 @@ body,
 }
 
 body {
-  background: radial-gradient(circle at top left, var(--grad-2), var(--bg) 45%, var(--grad-1));
-  color: var(--text);
-  transition: background-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--theme-bg);
+  color: var(--theme-text);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Reusable utility classes */
-.bg-app {
-  background-color: var(--bg);
+.interactive-dots {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image: radial-gradient(circle, var(--theme-muted) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.15;
+  pointer-events: none;
 }
 
-.bg-surface {
-  background-color: var(--surface);
+.interactive-dots-glow {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(135deg, var(--theme-accent), var(--theme-primary), var(--theme-highlight));
+  mask-image: 
+    radial-gradient(circle, black 1.5px, transparent 1.5px), 
+    radial-gradient(350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), black 10%, transparent 100%);
+  mask-size: 32px 32px, 100% 100%;
+  mask-repeat: repeat, no-repeat;
+  mask-composite: intersect;
+  -webkit-mask-image: 
+    radial-gradient(circle, black 1.5px, transparent 1.5px), 
+    radial-gradient(350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), black 10%, transparent 100%);
+  -webkit-mask-size: 32px 32px, 100% 100%;
+  -webkit-mask-repeat: repeat, no-repeat;
+  -webkit-mask-composite: source-in;
+  pointer-events: none;
 }
 
-.bg-surface-elevated {
-  background-color: var(--surface-elevated);
-}
-
-.text-app {
-  color: var(--text);
-}
-
-.text-muted {
-  color: var(--text-muted);
-}
-
-.border-app {
-  border-color: var(--border);
-}
-
-.btn-primary {
-  background-color: var(--primary);
-  color: var(--on-primary);
-}
-
-.btn-primary:hover {
-  background-color: var(--primary-hover);
-}
-
-.btn-primary:active {
-  background-color: var(--primary-pressed);
-}
-
-.focus-ring:focus-visible {
-  outline: 2px solid var(--ring);
-  outline-offset: 2px;
-}
